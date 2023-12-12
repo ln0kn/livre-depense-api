@@ -10,7 +10,7 @@ class Article extends Model
 {
     use HasFactory, HasUlids;
 
-    public function category(){
+    public function categorie(){
         return $this-> belongsTo(Category::class);
     }
 }

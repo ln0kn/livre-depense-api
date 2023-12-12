@@ -17,7 +17,8 @@ class ConstanteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'depense_mensuel'=> 150000,
+            'seuil_alerte'=> 80,
         ];
     }
 }

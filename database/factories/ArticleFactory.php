@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class ArticleFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'libelle'=> $this->faker->unique()->randomElement(['sucre','savon','telephone','huile de vidange','altere']),
+            'categorie_id'=> Category::factory(),
         ];
     }
 }

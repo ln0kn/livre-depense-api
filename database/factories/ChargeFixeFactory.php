@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class ChargeFixeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'montant'=> $this->faker->numberBetween(10000, 1000000),
+            'quantite'=> 1,
+            'article_id'=>Article::class
         ];
     }
 }

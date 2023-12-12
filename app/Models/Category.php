@@ -10,6 +10,6 @@ class Category extends Model
 {
         use HasFactory, HasUlids;
         public function articles(){
-            return $this->hasMany(Article::class);
+            return $this->hasMany(Article::class, 'categorie_id');
         }
 }
