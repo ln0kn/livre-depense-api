@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreConstanteRequest;
-use App\Http\Requests\UpdateConstanteRequest;
-use App\Models\Constante;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Models\Article;
 
-class ConstanteController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class ConstanteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreConstanteRequest $request)
+    public function store(StoreArticleRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class ConstanteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Constante $constante)
+    public function show(Article $article)
     {
         //
     }
@@ -43,7 +44,7 @@ class ConstanteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Constante $constante)
+    public function edit(Article $article)
     {
         //
     }
@@ -51,7 +52,7 @@ class ConstanteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateConstanteRequest $request, Constante $constante)
+    public function update(UpdateArticleRequest $request, Article $article)
     {
         //
     }
@@ -59,7 +60,7 @@ class ConstanteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Constante $constante)
+    public function destroy(Article $article)
     {
         //
     }

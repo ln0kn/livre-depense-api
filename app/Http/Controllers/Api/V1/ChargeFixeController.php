@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreDepenseRequest;
-use App\Http\Requests\UpdateDepenseRequest;
-use App\Models\Depense;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreChargeFixeRequest;
+use App\Http\Requests\UpdateChargeFixeRequest;
+use App\Models\ChargeFixe;
 
-class DepenseController extends Controller
+class ChargeFixeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class DepenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDepenseRequest $request)
+    public function store(StoreChargeFixeRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class DepenseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Depense $depense)
+    public function show(ChargeFixe $chargeFixe)
     {
         //
     }
@@ -43,7 +44,7 @@ class DepenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Depense $depense)
+    public function edit(ChargeFixe $chargeFixe)
     {
         //
     }
@@ -51,7 +52,7 @@ class DepenseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDepenseRequest $request, Depense $depense)
+    public function update(UpdateChargeFixeRequest $request, ChargeFixe $chargeFixe)
     {
         //
     }
@@ -59,7 +60,7 @@ class DepenseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Depense $depense)
+    public function destroy(ChargeFixe $chargeFixe)
     {
         //
     }

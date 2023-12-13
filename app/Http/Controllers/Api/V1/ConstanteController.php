@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\StoreChargeFixeRequest;
-use App\Http\Requests\UpdateChargeFixeRequest;
-use App\Models\ChargeFixe;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreConstanteRequest;
+use App\Http\Requests\UpdateConstanteRequest;
+use App\Models\Constante;
 
-class ChargeFixeController extends Controller
+class ConstanteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +28,7 @@ class ChargeFixeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreChargeFixeRequest $request)
+    public function store(StoreConstanteRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class ChargeFixeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ChargeFixe $chargeFixe)
+    public function show(Constante $constante)
     {
         //
     }
@@ -43,7 +44,7 @@ class ChargeFixeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ChargeFixe $chargeFixe)
+    public function edit(Constante $constante)
     {
         //
     }
@@ -51,7 +52,7 @@ class ChargeFixeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateChargeFixeRequest $request, ChargeFixe $chargeFixe)
+    public function update(UpdateConstanteRequest $request, Constante $constante)
     {
         //
     }
@@ -59,7 +60,7 @@ class ChargeFixeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ChargeFixe $chargeFixe)
+    public function destroy(Constante $constante)
     {
         //
     }
