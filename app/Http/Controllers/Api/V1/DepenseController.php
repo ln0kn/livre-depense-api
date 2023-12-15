@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDepenseRequest;
 use App\Http\Requests\UpdateDepenseRequest;
+use App\Http\Resources\V1\DepenseResource;
+use App\Http\Resources\V1\DepenseCollection;
 use App\Models\Depense;
 
 class DepenseController extends Controller
@@ -14,7 +16,7 @@ class DepenseController extends Controller
      */
     public function index()
     {
-        //
+        return new DepenseCollection(Depense::all());
     }
 
     /**
@@ -38,7 +40,7 @@ class DepenseController extends Controller
      */
     public function show(Depense $depense)
     {
-        //
+        return new DepenseResource($depense);
     }
 
     /**

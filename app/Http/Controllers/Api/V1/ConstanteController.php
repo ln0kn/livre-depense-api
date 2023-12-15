@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreConstanteRequest;
 use App\Http\Requests\UpdateConstanteRequest;
+use App\Http\Resources\V1\ConstanteResource;
+use App\Http\Resources\V1\ConstanteCollection;
 use App\Models\Constante;
 
 class ConstanteController extends Controller
@@ -14,7 +16,7 @@ class ConstanteController extends Controller
      */
     public function index()
     {
-        //
+        return new ConstanteCollection(Constante::all());   
     }
 
     /**
@@ -38,7 +40,7 @@ class ConstanteController extends Controller
      */
     public function show(Constante $constante)
     {
-        //
+        return new ConstanteResource($constante);
     }
 
     /**

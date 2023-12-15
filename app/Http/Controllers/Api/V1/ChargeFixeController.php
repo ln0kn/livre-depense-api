@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChargeFixeRequest;
 use App\Http\Requests\UpdateChargeFixeRequest;
+use App\Http\Resources\V1\ChargeUtileCollection;
+use App\Http\Resources\V1\ChargeUtileResource;
 use App\Models\ChargeFixe;
 
 class ChargeFixeController extends Controller
@@ -14,7 +16,7 @@ class ChargeFixeController extends Controller
      */
     public function index()
     {
-        //
+        return new ChargeUtileCollection(ChargeFixe::all());
     }
 
     /**
@@ -38,7 +40,7 @@ class ChargeFixeController extends Controller
      */
     public function show(ChargeFixe $chargeFixe)
     {
-        //
+        return new ChargeUtileResource($chargeFixe);
     }
 
     /**

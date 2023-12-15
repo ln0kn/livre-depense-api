@@ -30,10 +30,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
+
 Route::group(['prefix' => 'v1' ], function () {
     Route::apiResource('category', CategoryController::class);
     Route::apiResource('article', ArticleController::class);
     Route::apiResource('constante', ConstanteController::class);
     Route::apiResource('charge', ChargeFixeController::class);
-    Route::apiResource('depenses', DepenseController::class);
+    Route::apiResource('depense', DepenseController::class);
 });
