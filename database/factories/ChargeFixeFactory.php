@@ -18,9 +18,10 @@ class ChargeFixeFactory extends Factory
     public function definition(): array
     {
         return [
+            'periodisite'=> $this->faker->numberBetween(1, 4),
             'montant'=> $this->faker->numberBetween(10000, 1000000),
             'quantite'=> 1,
-            'article_id'=>Article::class
+            'article_id' => Article::class
         ];
     }
 }

@@ -8,15 +8,28 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Http\Resources\V1\ArticleResource;
 use App\Http\Resources\V1\ArticleCollection;
 use App\Models\Article;
+use Illuminate\Http\Request;
+
+use App\Filters\V1\ArticleFilter;
 
 class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new ArticleCollection(Article::paginate());
+        $filter = new ArticleFilter();
+        
+        $queryItems = $filter->transform($request);
+        // dd($queryItems);
+
+        if(count($queryItems) == 0){
+            return new ArticleCollection(Article::paginate());
+        }else{
+            $articles = Article::where($queryItems)->paginate();
+            return new ArticleCollection($articles->appends($request->query()));
+        }
     }
 
     /**

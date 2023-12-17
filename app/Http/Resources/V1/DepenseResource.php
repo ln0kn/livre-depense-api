@@ -19,6 +19,8 @@ class DepenseResource extends JsonResource
             'nom'=>$this->designation,
             'montant'=>$this->montant,
             'quantite'=>$this->quantite,
+            'dateAchat'=>$this->paid_date,
+            'article_ulid'=>$this->article_id,
         ];
     }
 }

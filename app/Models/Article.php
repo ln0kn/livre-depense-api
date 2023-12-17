@@ -13,4 +13,8 @@ class Article extends Model
     public function categorie(){
         return $this-> belongsTo(Category::class);
     }
+    public function Charge()
+    {
+        return $this->belongsTo(ChargeFixe::class);
+    }
 }

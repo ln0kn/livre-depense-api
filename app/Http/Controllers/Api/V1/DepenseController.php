@@ -2,21 +2,33 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\DepenseFilter;
+use App\Filters\V1\Depenseilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreDepenseRequest;
 use App\Http\Requests\UpdateDepenseRequest;
 use App\Http\Resources\V1\DepenseResource;
 use App\Http\Resources\V1\DepenseCollection;
 use App\Models\Depense;
-
+use Illuminate\Http\Request;
 class DepenseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return new DepenseCollection(Depense::all());
+        $filter = new DepenseFilter();
+        
+        $queryItems = $filter->transform($request);
+        // dd($queryItems);
+
+        if(count($queryItems) == 0){
+            return new DepenseCollection(Depense::paginate());
+        }else{
+            $charge = Depense::where($queryItems)->paginate();
+            return new DepenseCollection($charge->appends($request->query()));
+        }   
     }
 
     /**

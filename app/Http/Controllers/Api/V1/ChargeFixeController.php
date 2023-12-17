@@ -2,21 +2,33 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Filters\V1\ChargeFixeFilter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChargeFixeRequest;
 use App\Http\Requests\UpdateChargeFixeRequest;
 use App\Http\Resources\V1\ChargeUtileCollection;
 use App\Http\Resources\V1\ChargeUtileResource;
 use App\Models\ChargeFixe;
+use Illuminate\Http\Request;
 
 class ChargeFixeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return new ChargeUtileCollection(ChargeFixe::all());
+    public function index(Request  $request)
+    {   
+        $filter = new ChargeFixeFilter();
+        
+        $queryItems = $filter->transform($request);
+        // dd($queryItems);
+
+        if(count($queryItems) == 0){
+            return new ChargeUtileCollection(ChargeFixe::paginate());
+        }else{
+            $charge = ChargeFixe::where($queryItems)->paginate();
+            return new ChargeUtileCollection($charge->appends($request->query()));
+        }   
     }
 
     /**

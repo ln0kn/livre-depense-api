@@ -19,7 +19,7 @@ class ChargeUtileResource extends JsonResource
             'ulid' => $this->id,
             'montant' => $this->montant,
             'quantite' => $this->quantite,
-            // '' => $this->id,
+            'article_ulid' => $this->article_id,
         ];
     }
 }
