@@ -17,18 +17,19 @@ class ChargeFixeController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request  $request)
-    {   
+    { 
         $filter = new ChargeFixeFilter();
-        
-        $queryItems = $filter->transform($request);
-        // dd($queryItems);
+        $filterItems = $filter->transform($request);
 
-        if(count($queryItems) == 0){
-            return new ChargeUtileCollection(ChargeFixe::paginate());
-        }else{
-            $charge = ChargeFixe::where($queryItems)->paginate();
-            return new ChargeUtileCollection($charge->appends($request->query()));
-        }   
+        $includeArticle = $request->query('includeArticle');
+
+        $articles = ChargeFixe::where($filterItems);
+
+        if($includeArticle){
+            $articles = $articles->with('article');
+        }
+            return new ChargeUtileCollection($articles->paginate() ->appends($request->query()));
+        
     }
 
     /**
@@ -52,6 +53,15 @@ class ChargeFixeController extends Controller
      */
     public function show(ChargeFixe $chargeFixe)
     {
+
+        $includeArticle = request()->query('includeArticle');
+
+        if($includeArticle){
+        return new ChargeUtileResource($chargeFixe->loadMissing('article'));
+
+        }
+
+
         return new ChargeUtileResource($chargeFixe);
     }
 

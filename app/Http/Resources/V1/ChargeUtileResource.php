@@ -18,8 +18,8 @@ class ChargeUtileResource extends JsonResource
             'frequence' => $this->periodisite,
             'ulid' => $this->id,
             'montant' => $this->montant,
-            'quantite' => $this->quantite,
-            'article_ulid' => $this->article_id,
+            'quantite' => $this->quantite,            
+            'article' => ArticleResource::make($this->whenLoaded('article')),
         ];
     }
 }

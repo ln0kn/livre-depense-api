@@ -20,16 +20,17 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         $filter = new ArticleFilter();
-        
-        $queryItems = $filter->transform($request);
-        // dd($queryItems);
+        $filterItems = $filter->transform($request);
 
-        if(count($queryItems) == 0){
-            return new ArticleCollection(Article::paginate());
-        }else{
-            $articles = Article::where($queryItems)->paginate();
-            return new ArticleCollection($articles->appends($request->query()));
+        $includeCategory = $request->query('includeCategory');
+
+        $articles = Article::where($filterItems);
+
+        if($includeCategory){
+            $articles = $articles->with('categorie');
         }
+            return new ArticleCollection($articles->paginate() ->appends($request->query()));
+        
     }
 
     /**
@@ -53,6 +54,15 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+
+        $includeCategory = request()->query('includeCategory');
+
+        if($includeCategory){
+        return new ArticleResource($article->loadMissing('categorie'));
+
+        }
+
+
         return new ArticleResource($article);
     }
 

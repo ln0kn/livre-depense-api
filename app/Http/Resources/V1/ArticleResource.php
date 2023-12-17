@@ -16,8 +16,8 @@ class ArticleResource extends JsonResource
     {
         return [
             'ulid' => $this->id,
-            'designation' => $this->libelle,
-            // 'ulid' => $this->id,
+            'designation' => $this->libelle,            
+            'category' => CategoryResource::make($this->whenLoaded('categorie')),
         ];
     }
 }
