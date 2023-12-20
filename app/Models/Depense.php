@@ -15,5 +15,8 @@ class Depense extends Model
         public function article(){
             return $this->belongsTo(Article::class);
         }
-    
+
+
+
+    protected $fillable = ['designation', 'quantite', 'montant', 'paid_date','article_id'];
 }

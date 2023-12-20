@@ -11,7 +11,7 @@ class StoreDepenseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreDepenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom'=>['bail','required', 'unique:depenses,designation','max:25'],
+            'montant'=>['bail','required'],
+            'quantite'=>['bail','required'],
+            'dateAchat'=>['bail','required','date_format:Y-m-d H:i:s'],
+            'article' => ['required', 'exists:articles,id'],
+            
         ];
+
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'designation'=> $this->nom,
+            'paid_date'=> $this->dateAchat,
+            'article_id'=> $this->article
+        ]);
     }
 }

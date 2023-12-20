@@ -33,19 +33,20 @@ class ChargeFixeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreChargeFixeRequest $request)
     {
-        //
+        
+    
+        $validatedData = $request->validated();
+
+        return new ChargeUtileResource(ChargeFixe::create([
+            'periodisite' => $request->frequence,
+            'article_id' => $request->article,
+            'montant' => $request->montant,
+            'quantite' => $request->quantite,
+        ]));
     }
 
     /**
@@ -65,13 +66,6 @@ class ChargeFixeController extends Controller
         return new ChargeUtileResource($chargeFixe);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ChargeFixe $chargeFixe)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

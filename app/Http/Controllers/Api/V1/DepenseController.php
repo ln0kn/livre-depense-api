@@ -32,19 +32,23 @@ class DepenseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreDepenseRequest $request)
     {
-        //
+        
+        $validatedData = $request->validated();
+        // return new ArticleResource(Article::created($request->all()));
+        // ddd($validatedData);
+        print_r($request->article);
+
+        return new DepenseResource(Depense::create([
+            'designation' => $request->nom,
+            'montant' => $request->montant,
+            'quantite' => $request->quantite,
+            'article_id' => $request->article,
+            'paid_date' => $request->dateAchat,
+        ]));
     }
 
     /**
@@ -55,13 +59,6 @@ class DepenseController extends Controller
         return new DepenseResource($depense);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Depense $depense)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.

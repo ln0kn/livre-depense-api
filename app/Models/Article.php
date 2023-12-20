@@ -17,4 +17,10 @@ class Article extends Model
     {
         return $this->belongsTo(ChargeFixe::class);
     }
+
+
+
+    protected $fillable=[
+        'libelle','categorie_id'
+    ];
 }

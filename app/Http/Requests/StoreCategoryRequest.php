@@ -11,7 +11,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nom'=> ['bail','required', 'unique:categories,libelle'],
         ];
+    }
+
+
+    protected function prepareForValidation()
+    {
+        $this->merge(
+            [
+                'libelle' => $this->nom,
+            ]
+            );
     }
 }

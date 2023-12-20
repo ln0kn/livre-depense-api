@@ -17,4 +17,8 @@ class ChargeFixe extends Model
         {
             return $this->belongsTo(Article::class);
         }
+
+        protected $fillable=[
+            'periodisite','montant','quantite', 'article_id'
+        ];
 }

@@ -11,7 +11,7 @@ class StoreChargeFixeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreChargeFixeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'frequence'=>['bail','required', 'gt:0','lt:5'],
+            'article' => ['required', 'exists:articles,id'],
+            'montant' => ['required', 'gt:0','integer'],
+            'quantite' => ['required', 'gt:0'],
+            
         ];
+
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'periodisite'=> $this->frequence,
+            'montant'=> $this->montant,
+            'quantite'=> $this->quantite,
+            'article_id'=> $this->article
+        ]);
     }
 }
