@@ -65,7 +65,7 @@ class DepenseController extends Controller
      */
     public function update(UpdateDepenseRequest $request, Depense $depense)
     {
-        //
+        return $depense->update($request->all());
     }
 
     /**

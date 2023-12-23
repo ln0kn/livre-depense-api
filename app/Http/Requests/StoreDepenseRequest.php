@@ -23,8 +23,8 @@ class StoreDepenseRequest extends FormRequest
     {
         return [
             'nom'=>['bail','required', 'unique:depenses,designation','max:25'],
-            'montant'=>['bail','required'],
-            'quantite'=>['bail','required'],
+            'montant'=>['bail','required','gt:0'],
+            'quantite'=>['bail','required','gt:0'],
             'dateAchat'=>['bail','required','date_format:Y-m-d H:i:s'],
             'article' => ['required', 'exists:articles,id'],
             

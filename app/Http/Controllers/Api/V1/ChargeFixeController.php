@@ -72,7 +72,9 @@ class ChargeFixeController extends Controller
      */
     public function update(UpdateChargeFixeRequest $request, ChargeFixe $chargeFixe)
     {
-        //
+        // return $chargeFixe->update($request->all());
+        dd('');
+        return $chargeFixe->update($request->all());
     }
 
     /**

@@ -11,7 +11,7 @@ class UpdateConstanteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,38 @@ class UpdateConstanteRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT') {
+            return [
+                'seuil' => ['required', 'gt:0', 'lt:100'],
+                'montantDepense' => ['required', 'gt:0'],
+            ];
+        } else {
+            return [
+                'seuil' => ['sometimes', 'required', 'gt:0', 'lt:100'],
+                'montantDepense' => ['sometimes', 'required', 'gt:0'],
+            ];
+        }
+    }
+
+    protected function prepareForValidation()
+    {
+        if ($this->seuil) {
+            $this->merge([
+                'seuil_alerte' => $this->seuil
+            ]);
+        }
+        if ($this->montantDepense) {
+            $this->merge([
+                'depense_mensuel' => $this->montantDepense
+            ]);
+        }
+        //  if($this->seuil && $this->montantDepense){
+        //     dd('');
+        //     $this->merge([
+        //         'seuil_alerte' => $this->seuil,
+        //         'depense_mensuel' => $this->montantDepense
+        //     ]);
+        //  }
     }
 }

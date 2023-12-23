@@ -11,7 +11,7 @@ class UpdateArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,39 @@ class UpdateArticleRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if ($method == 'PUT') {
+            return [
+                'designation' => ['bail', 'required', 'unique:articles,libelle', 'max:25'],
+                'category' => ['required', 'exists:categories,id'],
+
+            ];
+        } else {
+            return [
+                'designation' => ['sometimes', 'bail', 'required', 'unique:articles,libelle', 'max:25'],
+                'category' => ['sometimes', 'required', 'exists:categories,id'],
+
+            ];
+        }
     }
+    protected function prepareForValidation()
+    {
+        $designation = $this->designation;
+        $category = $this->category;
+    
+        if ($designation || $category) {
+            $dataToMerge = [];
+    
+            if ($designation) {
+                $dataToMerge['libelle'] = $designation;
+            }
+    
+            if ($category) {
+                $dataToMerge['categorie_id'] = $category;
+            }
+    
+            $this->merge($dataToMerge);
+        }
+    }
+    
 }

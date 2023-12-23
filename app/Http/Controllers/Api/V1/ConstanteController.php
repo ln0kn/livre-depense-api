@@ -28,14 +28,6 @@ class ConstanteController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreConstanteRequest $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(Constante $constante)
@@ -44,19 +36,12 @@ class ConstanteController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Constante $constante)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateConstanteRequest $request, Constante $constante)
     {
-        //
+        // var_dump($request);
+        return $constante->update($request->all());
     }
 
     /**

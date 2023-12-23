@@ -16,8 +16,8 @@ class ConstanteResource extends JsonResource
     {
         return [
             'ulid'=> $this->id,
-            'seuil'=>$this->depense_mensuel,
-            'montantDepense'=>$this->seuil_alerte,
+            'seuil'=>$this->seuil_alerte,
+            'montantDepense'=>$this->depense_mensuel,
         ];
     }
 }
