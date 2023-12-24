@@ -18,5 +18,5 @@ class Depense extends Model
 
 
 
-    protected $fillable = ['designation', 'quantite', 'montant', 'paid_date','article_id'];
+    protected $fillable = ['id','designation', 'quantite', 'montant', 'paid_date','article_id'];
 }
