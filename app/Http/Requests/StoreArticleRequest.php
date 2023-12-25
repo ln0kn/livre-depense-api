@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Validation\Rule;
+
 class StoreArticleRequest extends FormRequest
 {
     /**
@@ -12,7 +13,9 @@ class StoreArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $user = $this->user();
+        
+        return $user != null && $user->tokenCan('create');
     }
 
     /**
@@ -23,18 +26,17 @@ class StoreArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'designation'=>['bail','required', 'unique:articles,libelle','max:25'],
+            'designation' => ['bail', 'required', 'unique:articles,libelle', 'max:25'],
             'category' => ['required', 'exists:categories,id'],
-            
-        ];
 
+        ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'libelle'=> $this->designation,
-            'categorie_id'=> $this->category
+            'libelle' => $this->designation,
+            'categorie_id' => $this->category
         ]);
     }
 }
