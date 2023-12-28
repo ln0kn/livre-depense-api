@@ -9,8 +9,15 @@ use App\Http\Resources\V1\ArticleResource;
 use App\Http\Resources\V1\ArticleCollection;
 use App\Models\Article;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 use App\Filters\V1\ArticleFilter;
+use App\Http\Responses\ApiResponse;
+use App\Responses\V1\ApiErrorResponse;
+use App\Responses\V1\ApiSuccessResponse;
+// use Illuminate\Support\Facades\Response;
+use Throwable;
 
 class ArticleController extends Controller
 {
@@ -19,18 +26,41 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        $filter = new ArticleFilter();
-        $filterItems = $filter->transform($request);
 
-        $includeCategory = $request->query('includeCategory');
 
-        $articles = Article::where($filterItems);
+        try {
+            // Your logic here
+            $data = Article::findOrFail(2);
 
-        if($includeCategory){
-            $articles = $articles->with('categorie');
+            return ApiResponse::success($data, 'Request successful');
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
         }
-            return new ArticleCollection($articles->paginate() ->appends($request->query()));
-        
+
+
+        // try {
+        //     $filter = new ArticleFilter();
+        //     $filterItems = $filter->transform($request);
+
+        //     $includeCategory = $request->query('includeCategory');
+
+        //     $articles = Article::where($filterItems);
+
+        //     if ($includeCategory) {
+        //         $articles = $articles->with('categorie');
+        //     }
+
+        //     // return new ApiSuccessResponse(
+        //     //     new ArticleCollection($articles->paginate()->appends($request->query())),
+        //     //     ['message' => 'User was created successfully'],
+        //     //     Response::HTTP_CREATED
+        //     // );
+        //     $data = new ArticleCollection($articles->paginate()->appends($request->query()));
+
+        //     return ApiResponse::success($data, 'Request successful');
+        // } catch (\Exception $e) {
+        //     return ApiResponse::error($e->getMessage());
+        // }
     }
 
     /**
@@ -38,14 +68,35 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
-        $validatedData = $request->validated();
-        // return new ArticleResource(Article::created($request->all()));
-        // ddd($validatedData);
 
-        return new ArticleResource(Article::create([
-            'libelle' => $request->designation,
-            'categorie_id' => $request->category,
-        ]));
+
+
+
+
+
+
+
+        try {
+            // Your logic here
+            return new ArticleResource(Article::created($request->all()));
+        } catch (\Exception $e) {
+            return ApiResponse::error($e->getMessage());
+        }
+
+
+
+
+
+
+
+        // $validatedData = $request->validated();
+        // // return new ArticleResource(Article::created($request->all()));
+        // // ddd($validatedData);
+
+        // return new ArticleResource(Article::create([
+        //     'libelle' => $request->designation,
+        //     'categorie_id' => $request->category,
+        // ]));
     }
 
     /**
@@ -56,15 +107,14 @@ class ArticleController extends Controller
 
         $includeCategory = request()->query('includeCategory');
 
-        if($includeCategory){
-        return new ArticleResource($article->loadMissing('categorie'));
-
+        if ($includeCategory) {
+            return new ArticleResource($article->loadMissing('categorie'));
         }
 
 
         return new ArticleResource($article);
     }
-    
+
     /**
      * Update the specified resource in storage.
      */
